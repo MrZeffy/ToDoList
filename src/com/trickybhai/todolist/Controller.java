@@ -81,6 +81,8 @@ public class Controller {
         try{
             Parent root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
             dialog.getDialogPane().setContent(root);
+            dialog.setTitle("Adding new item");
+            dialog.show();
         }catch (IOException e){
             System.out.println("Couldn't load dialog");
             e.printStackTrace();
