@@ -1,5 +1,6 @@
 package com.trickybhai.todolist;
 
+import com.trickybhai.todolist.datamodel.TodoData;
 import com.trickybhai.todolist.datamodel.Todoitems;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,7 +28,7 @@ public class Controller {
     private Label dateLabel;
 
     public void initialize() {
-        Todoitems item1 = new Todoitems("Mail birthday card",
+       /* Todoitems item1 = new Todoitems("Mail birthday card",
                 "Buy a birthday card for aisha", LocalDate.of(2020, Month.AUGUST, 26));
         Todoitems item2 = new Todoitems("Doctor's appointment",
                 "See doctor in the clinic", LocalDate.of(2020, Month.SEPTEMBER, 26));
@@ -44,6 +45,9 @@ public class Controller {
         todoitemsList.add(item3);
         todoitemsList.add(item4);
         todoitemsList.add(item5);
+        TodoData.getInstance().setTodoitems(todoitemsList);*/
+
+
 
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
             @Override
@@ -57,12 +61,13 @@ public class Controller {
             }
         });
 
-        todoListView.getItems().setAll(todoitemsList);
+
+        todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
-
     }
+    
     @FXML
     public void handleClickListView(){
         Todoitems todoitems = todoListView.getSelectionModel().getSelectedItem();
