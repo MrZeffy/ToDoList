@@ -21,6 +21,11 @@ public class TodoData {
     private List<Todoitems> todoitems;
     private DateTimeFormatter formatter;
 
+    public void addTodoItem(Todoitems todoitems){
+        this.todoitems.add(todoitems);
+    }
+
+
     public static TodoData getInstance(){
         return instance;
     }
