@@ -29,26 +29,6 @@ public class Controller {
 
 
     public void initialize() {
-       /* Todoitems item1 = new Todoitems("Mail birthday card",
-                "Buy a birthday card for aisha", LocalDate.of(2020, Month.AUGUST, 26));
-        Todoitems item2 = new Todoitems("Doctor's appointment",
-                "See doctor in the clinic", LocalDate.of(2020, Month.SEPTEMBER, 26));
-        Todoitems item3 = new Todoitems("Finish design proposal of client",
-                "Compose an email to mike about the designs", LocalDate.of(2020, Month.AUGUST, 27));
-        Todoitems item4 = new Todoitems("Pickup heena from station",
-                "Heena is arriving on Ludhina junction", LocalDate.of(2020, Month.MARCH, 26));
-        Todoitems item5 = new Todoitems("Pickup dry cleaning",
-                "Pickup clothes from downtown", LocalDate.of(2020, Month.APRIL, 26));
-
-        todoitemsList = new ArrayList<>();
-        todoitemsList.add(item1);
-        todoitemsList.add(item2);
-        todoitemsList.add(item3);
-        todoitemsList.add(item4);
-        todoitemsList.add(item5);
-        TodoData.getInstance().setTodoitems(todoitemsList);*/
-
-
 
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
             @Override
@@ -93,14 +73,5 @@ public class Controller {
         }else {
             System.out.println("Cancel pressed");
         }
-    }
-    
-    @FXML
-    public void handleClickListView(){
-        Todoitems todoitems = todoListView.getSelectionModel().getSelectedItem();
-//        System.out.println("The selected item is "+todoitems);
-        dateLabel.setText(todoitems.getDeadline().toString());
-        itemDetailTextArea.setText(todoitems.getDetails());
-
     }
 }
