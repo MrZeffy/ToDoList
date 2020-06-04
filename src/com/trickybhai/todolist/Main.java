@@ -20,7 +20,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         try{
             TodoData.getInstance().storeTodoItems();
         }catch(IOException e){
@@ -29,7 +29,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         try{
             TodoData.getInstance().loadTodoItems();
         }catch(IOException e){
