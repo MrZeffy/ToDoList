@@ -4,22 +4,20 @@ import javafx.collections.FXCollections;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 
 public class TodoData {
-    private static TodoData instance = new TodoData();
-    private static String filename = "TotolistItems.txt";
+    private static final TodoData instance = new TodoData();
+    private static final String filename = "TotolistItems.txt";
 
     private List<Todoitems> todoitems;
-    private DateTimeFormatter formatter;
+    private final DateTimeFormatter formatter;
 
     public void addTodoItem(Todoitems todoitems){
         this.todoitems.add(todoitems);
@@ -38,9 +36,6 @@ public class TodoData {
         return todoitems;
     }
 
-    /*public void setTodoitems(List<Todoitems> todoitems) {
-        this.todoitems = todoitems;
-    }*/
 
     public void loadTodoItems() throws IOException{
         todoitems = FXCollections.observableArrayList();
@@ -73,13 +68,11 @@ public class TodoData {
         BufferedWriter bw = Files.newBufferedWriter(path);
 
         try{
-            Iterator<Todoitems> iter = todoitems.iterator();
-                while(iter.hasNext()){
-                    Todoitems item = iter.next();
-                    bw.write(String.format("%s\t%s\t%s",item.getShortDesciption(), item.getDetails()
-                    ,item.getDeadline().format(formatter)));
-                    bw.newLine();
-                }
+            for (Todoitems item : todoitems) {
+                bw.write(String.format("%s\t%s\t%s", item.getShortDesciption(), item.getDetails()
+                        , item.getDeadline().format(formatter)));
+                bw.newLine();
+            }
         }finally {
             if (bw!=null){
                 bw.close();
