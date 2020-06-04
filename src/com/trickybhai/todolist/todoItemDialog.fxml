@@ -6,9 +6,9 @@
 <?import javafx.scene.control.DatePicker?>
 <DialogPane fx:controller="com.trickybhai.todolist.DialogController"
             xmlns:fx="http://javafx.com/fxml">
-    <headerText>
-        Add the required details
-    </headerText>
+<!--    <headerText>-->
+<!--        Add the required details-->
+<!--    </headerText>-->
     <content>
         <GridPane vgap="10" hgap="10">
             <Label text="Short Desciption:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
