@@ -43,7 +43,8 @@ public class Controller {
         });
 
 
-        todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+       // todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+        todoListView.setItems(TodoData.getInstance().getTodoitems());
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
@@ -72,10 +73,8 @@ public class Controller {
         if (result.isPresent() && result.get()==ButtonType.OK){
             DialogController controller = fxmlLoader.getController();
             Todoitems newItem = controller.processResults();
-            todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+            //todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
             todoListView.getSelectionModel().select(newItem);
-        }else {
-            System.out.println("Cancel pressed");
         }
     }
 }
