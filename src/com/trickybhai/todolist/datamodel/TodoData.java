@@ -40,6 +40,7 @@ public class TodoData {
 
     public void loadTodoItems() throws IOException{
         todoitems = FXCollections.observableArrayList();
+        
         Path path = Paths.get(filename);
         BufferedReader br = Files.newBufferedReader(path);
 
