@@ -7,9 +7,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -48,6 +52,26 @@ public class Controller {
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
+        todoListView.setCellFactory(new Callback<ListView<Todoitems>, ListCell<Todoitems>>() {
+            @Override
+            public ListCell<Todoitems> call(ListView<Todoitems> todoitemsListView) {
+                ListCell<Todoitems> cell = new ListCell<>(){
+                    @Override
+                    protected void updateItem(Todoitems todoitems, boolean b) {
+                        super.updateItem(todoitems, b);
+                        if (b){
+                            setText(null);
+                        }else{
+                            setText(todoitems.getShortDesciption());
+                            if (todoitems.getDeadline().equals(LocalDate.now())){
+                                setTextFill(Color.RED);
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }
 
     @FXML
