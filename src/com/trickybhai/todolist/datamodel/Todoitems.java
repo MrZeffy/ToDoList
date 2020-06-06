@@ -37,9 +37,9 @@ public class Todoitems {
         this.deadline = deadline;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return shortDesciption;
-    }
+    }*/
 
 }

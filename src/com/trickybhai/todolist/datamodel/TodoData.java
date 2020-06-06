@@ -1,6 +1,7 @@
 package com.trickybhai.todolist.datamodel;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +17,7 @@ public class TodoData {
     private static final TodoData instance = new TodoData();
     private static final String filename = "TotolistItems.txt";
 
-    private List<Todoitems> todoitems;
+    private ObservableList<Todoitems> todoitems;
     private final DateTimeFormatter formatter;
 
     public void addTodoItem(Todoitems todoitems){
@@ -32,13 +33,14 @@ public class TodoData {
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     }
 
-    public List<Todoitems> getTodoitems() {
+    public ObservableList<Todoitems> getTodoitems() {
         return todoitems;
     }
 
 
     public void loadTodoItems() throws IOException{
         todoitems = FXCollections.observableArrayList();
+        
         Path path = Paths.get(filename);
         BufferedReader br = Files.newBufferedReader(path);
 

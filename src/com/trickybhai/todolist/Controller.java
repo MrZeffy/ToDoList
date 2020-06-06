@@ -7,9 +7,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -43,10 +47,33 @@ public class Controller {
         });
 
 
-        todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+       // todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+        todoListView.setItems(TodoData.getInstance().getTodoitems());
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
+        todoListView.setCellFactory(new Callback<ListView<Todoitems>, ListCell<Todoitems>>() {
+            @Override
+            public ListCell<Todoitems> call(ListView<Todoitems> todoitemsListView) {
+                ListCell<Todoitems> cell = new ListCell<>(){
+                    @Override
+                    protected void updateItem(Todoitems todoitems, boolean b) {
+                        super.updateItem(todoitems, b);
+                        if (b){
+                            setText(null);
+                        }else{
+                            setText(todoitems.getShortDesciption());
+                            if (todoitems.getDeadline().isBefore(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.RED);
+                            }else if (todoitems.getDeadline().equals(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.BLUEVIOLET);
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }
 
     @FXML
@@ -72,10 +99,8 @@ public class Controller {
         if (result.isPresent() && result.get()==ButtonType.OK){
             DialogController controller = fxmlLoader.getController();
             Todoitems newItem = controller.processResults();
-            todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
+            //todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
             todoListView.getSelectionModel().select(newItem);
-        }else {
-            System.out.println("Cancel pressed");
         }
     }
 }
