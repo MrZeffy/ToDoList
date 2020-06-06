@@ -63,8 +63,10 @@ public class Controller {
                             setText(null);
                         }else{
                             setText(todoitems.getShortDesciption());
-                            if (todoitems.getDeadline().equals(LocalDate.now())){
+                            if (todoitems.getDeadline().isBefore(LocalDate.now().plusDays(1))){
                                 setTextFill(Color.RED);
+                            }else if (todoitems.getDeadline().equals(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.BLUEVIOLET);
                             }
                         }
                     }
