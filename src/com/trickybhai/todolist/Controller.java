@@ -103,4 +103,36 @@ public class Controller {
             todoListView.getSelectionModel().select(newItem);
         }
     }
+
+    @FXML
+    public void showEditItemDialogBox(){
+        Todoitems item = todoListView.getSelectionModel().getSelectedItem();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("todoItemDialog.fxml"));
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+
+        dialog.setTitle("Edit item");
+        dialog.setHeaderText("Make your changes and then click OK");
+        DialogController.editing = true;
+        DialogController.itemToBeEdited = item;
+        try{
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        }catch (IOException e){
+            System.out.println("Couldn't load dialog box.");
+            e.printStackTrace();
+        }
+
+        System.out.println("Successfully set variables");
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get().equals(ButtonType.OK)){
+            DialogController controller = fxmlLoader.getController();
+            Todoitems editedItem = controller.editingItem();
+            todoListView.getSelectionModel().select(editedItem);
+        }
+
+    }
 }
