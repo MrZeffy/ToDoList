@@ -4,6 +4,8 @@ import com.trickybhai.todolist.datamodel.TodoData;
 import com.trickybhai.todolist.datamodel.Todoitems;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -31,9 +33,22 @@ public class Controller {
     @FXML
     private BorderPane mainBorderPane;
 
+    @FXML
+    private ContextMenu listContextMenu;
+
 
     public void initialize() {
+        listContextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Todoitems todoitems = todoListView.getSelectionModel().getSelectedItem();
+                deleteItem(todoitems);
+            }
+        });
 
+        listContextMenu.getItems().addAll(deleteMenuItem);
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
             @Override
             public void changed(ObservableValue<? extends Todoitems> observableValue, Todoitems todoitems, Todoitems t1) {
@@ -71,6 +86,17 @@ public class Controller {
                         }
                     }
                 };
+
+                //Lambda expression.
+                cell.emptyProperty().addListener(
+                        (obs, wasEmpty, isNowEmpty) -> {
+                            if (isNowEmpty){
+                                cell.setContextMenu(null);
+                            }else {
+                                cell.setContextMenu(listContextMenu);
+                            }
+                }
+                );
                 return cell;
             }
         });
@@ -132,6 +158,21 @@ public class Controller {
             DialogController controller = fxmlLoader.getController();
             Todoitems editedItem = controller.editingItem();
             todoListView.getSelectionModel().select(editedItem);
+        }
+
+    }
+
+    public void deleteItem(Todoitems item){
+        //Confirmation dialog.
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Todo item");
+        alert.setHeaderText("Delete item: "+ item.getShortDesciption());
+        alert.setContentText("Are you sure? Press OK to confirm");
+        //make visible
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get().equals(ButtonType.OK)){
+            TodoData.getInstance().deleteTodoItem(item);
         }
 
     }
