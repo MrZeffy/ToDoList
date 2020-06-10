@@ -20,6 +20,7 @@ public class DialogController {
     @FXML
     private DatePicker deadlinePicker;
 
+    //Used for checking if we are editing an existing element or not.
     public static boolean editing;
     public static Todoitems itemToBeEdited;
 
