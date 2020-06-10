@@ -20,12 +20,45 @@ public class DialogController {
     @FXML
     private DatePicker deadlinePicker;
 
+    //Used for checking if we are editing an existing element or not.
+    public static boolean editing;
+    public static Todoitems itemToBeEdited;
+
+    public void initialize(){
+        System.out.println("Initializing");
+        if (editing){
+            shortDescriptionField.setText(itemToBeEdited.getShortDesciption());
+            detailsArea.setText(itemToBeEdited.getDetails());
+            deadlinePicker.setValue(itemToBeEdited.getDeadline());
+        }
+    }
+
+    @FXML
     public Todoitems processResults(){
         String shortDescription = shortDescriptionField.getText().trim();
         String details = detailsArea.getText().trim();
         LocalDate deadLine = deadlinePicker.getValue();
         Todoitems newItem = new Todoitems(shortDescription, details, deadLine);
-        TodoData.getInstance().addTodoItem(newItem);
+        if (!editing){
+            TodoData.getInstance().addTodoItem(newItem);
+        }
         return newItem;
     }
+
+    public Todoitems editingItem(){
+        itemToBeEdited.setShortDesciption(shortDescriptionField.getText());
+        itemToBeEdited.setDetails(detailsArea.getText());
+        itemToBeEdited.setDeadline(deadlinePicker.getValue());
+        return itemToBeEdited;
+    }
+
+
+  /*  @FXML
+    public Todoitems editingItems(Todoitems editingItem){
+        shortDescriptionField.setText(editingItem.getShortDesciption());
+        detailsArea.setText(editingItem.getDetails());
+        deadlinePicker.setValue(editingItem.getDeadline());
+
+        return new Todoitems(shortDescriptionField.getText(), detailsArea.getText(), deadlinePicker.getValue());
+    }*/
 }

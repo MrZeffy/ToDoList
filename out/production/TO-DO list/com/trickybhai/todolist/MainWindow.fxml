@@ -20,6 +20,13 @@
                     <MenuItem text="Exit"/>
                 </items>
             </Menu>
+            <Menu text="Edit">
+                <items>
+                    <MenuItem text="Edit" onAction="#showEditItemDialogBox"/>
+                </items>
+
+            </Menu>
+
         </MenuBar>
     </top>
     <left>
