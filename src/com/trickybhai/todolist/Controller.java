@@ -40,16 +40,23 @@ public class Controller {
 
 
     public void initialize() {
+        //Creating context menu.
         listContextMenu = new ContextMenu();
+
+        //Creating menu item "delete"
         MenuItem deleteMenuItem = new MenuItem("Delete");
+
+        //Anonymous event handler.
         deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                //getting item to be deleted and calling the deletitem function.
                 Todoitems todoitems = todoListView.getSelectionModel().getSelectedItem();
                 deleteItem(todoitems);
             }
         });
 
+        //Adding menu item to context item.
         listContextMenu.getItems().addAll(deleteMenuItem);
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
             @Override
