@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -38,16 +40,23 @@ public class Controller {
 
 
     public void initialize() {
+        //Creating context menu.
         listContextMenu = new ContextMenu();
+
+        //Creating menu item "delete"
         MenuItem deleteMenuItem = new MenuItem("Delete");
+
+        //Anonymous event handler.
         deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                //getting item to be deleted and calling the deletitem function.
                 Todoitems todoitems = todoListView.getSelectionModel().getSelectedItem();
                 deleteItem(todoitems);
             }
         });
 
+        //Adding menu item to context item.
         listContextMenu.getItems().addAll(deleteMenuItem);
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
             @Override
@@ -149,7 +158,6 @@ public class Controller {
             e.printStackTrace();
         }
 
-        System.out.println("Successfully set variables");
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
@@ -160,6 +168,16 @@ public class Controller {
             todoListView.getSelectionModel().select(editedItem);
         }
 
+    }
+
+    @FXML
+    public void handleKeyPressed(KeyEvent keyEvent){
+        Todoitems selected = todoListView.getSelectionModel().getSelectedItem();
+        if (selected!=null){
+            if (keyEvent.getCode().equals(KeyCode.DELETE)){
+                deleteItem(selected);
+            }
+        }
     }
 
     public void deleteItem(Todoitems item){
