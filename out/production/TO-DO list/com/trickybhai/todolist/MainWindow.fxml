@@ -9,25 +9,43 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane fx:id="mainBorderPane" fx:controller="com.trickybhai.todolist.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
-        <MenuBar>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="New" onAction="#showNewItemDialog"/>
-                    <SeparatorMenuItem/>
-                    <MenuItem text="Exit"/>
-                </items>
-            </Menu>
-            <Menu text="Edit">
-                <items>
-                    <MenuItem text="Edit" onAction="#showEditItemDialogBox"/>
-                </items>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New" onAction="#showNewItemDialog"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit"/>
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Edit" onAction="#showEditItemDialogBox"/>
+                    </items>
 
-            </Menu>
+                </Menu>
 
-        </MenuBar>
+            </MenuBar>
+            <ToolBar>
+                <HBox>
+                    <Button onAction="#showNewItemDialog">
+                        <graphic>
+                            <ImageView>
+                                <Image url="@resources/New24.gif"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </ToolBar>
+        </VBox>
+
     </top>
     <left>
         <ListView fx:id="todoListView" onKeyPressed="#handleKeyPressed">

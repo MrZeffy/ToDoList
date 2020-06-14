@@ -24,7 +24,6 @@ public class DialogController {
     public static Todoitems itemToBeEdited;
 
     public void initialize(){
-        System.out.println("Initializing");
         if (editing){
             shortDescriptionField.setText(itemToBeEdited.getShortDesciption());
             detailsArea.setText(itemToBeEdited.getDetails());

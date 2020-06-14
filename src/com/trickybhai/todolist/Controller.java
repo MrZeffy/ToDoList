@@ -158,7 +158,6 @@ public class Controller {
             e.printStackTrace();
         }
 
-        System.out.println("Successfully set variables");
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
