@@ -44,6 +44,7 @@ public class DialogController {
         return newItem;
     }
 
+    //Editing item event handler.
     public Todoitems editingItem(){
         itemToBeEdited.setShortDesciption(shortDescriptionField.getText());
         itemToBeEdited.setDetails(detailsArea.getText());
