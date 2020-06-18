@@ -7,3 +7,4 @@ very long todo item	Daman is going to be a great developer.Daman is going to be 
 Today's item	Checking color changes	07-06-2020
 Tomorrow's task	Checking the color for tomorrow's item	08-06-2020
 Adding through icon	I am adding this item using the new icon in the toolbar	17-06-2020
+June 19	adding a new item	19-06-2020

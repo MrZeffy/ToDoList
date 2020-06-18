@@ -4,6 +4,7 @@ import com.trickybhai.todolist.datamodel.TodoData;
 import com.trickybhai.todolist.datamodel.Todoitems;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 
 
@@ -56,6 +58,7 @@ public class Controller {
             }
         });
 
+
         //Adding menu item to context item.
         listContextMenu.getItems().addAll(deleteMenuItem);
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todoitems>() {
@@ -70,9 +73,15 @@ public class Controller {
             }
         });
 
-
+        SortedList<Todoitems> sortedList = new SortedList<>(TodoData.getInstance().getTodoitems(), new Comparator<Todoitems>() {
+            @Override
+            public int compare(Todoitems o1, Todoitems o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
        // todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
         todoListView.setItems(TodoData.getInstance().getTodoitems());
+        todoListView.setItems(sortedList);
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
