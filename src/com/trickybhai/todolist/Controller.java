@@ -68,12 +68,15 @@ public class Controller {
             }
         });
 
+        //Filtering predicate to get to get all items.
         wantAllItems = new Predicate<Todoitems>() {
             @Override
             public boolean test(Todoitems todoitems) {
                 return true;
             }
         };
+
+        //Filtering predicate to get only today's tasks.
         wantTodayItems = new Predicate<Todoitems>() {
             @Override
             public boolean test(Todoitems todoitems) {
@@ -96,6 +99,7 @@ public class Controller {
             }
         });
 
+        //Filtering list using FilteredList wrapper.
         filteredList = new FilteredList<>(TodoData.getInstance().getTodoitems(), wantAllItems);
         //Sorting list using a comparator.
         SortedList<Todoitems> sortedList = new SortedList<>(filteredList, new Comparator<Todoitems>() {
@@ -105,7 +109,7 @@ public class Controller {
             }
         });
        // todoListView.getItems().setAll(TodoData.getInstance().getTodoitems());
-        todoListView.setItems(TodoData.getInstance().getTodoitems());
+        //todoListView.setItems(TodoData.getInstance().getTodoitems());
         todoListView.setItems(sortedList);
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
@@ -214,6 +218,7 @@ public class Controller {
         }
     }
 
+    @FXML
     public void deleteItem(Todoitems item){
         //Confirmation dialog.
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

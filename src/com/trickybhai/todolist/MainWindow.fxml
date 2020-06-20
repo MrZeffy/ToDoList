@@ -37,6 +37,7 @@
             </MenuBar>
             <ToolBar>
                 <HBox>
+                    <!--Adding a new item button inside Toolbar at the top-->
                     <Button onAction="#showNewItemDialog">
                         <tooltip>
                             <Tooltip text="Add a new Todo item"/>
@@ -47,6 +48,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
+                    <!--A toggle button used to filter today's items-->
                     <ToggleButton fx:id="filterToggleButton" text="Today's items" onAction="#handleFilterButton">
                         <tooltip>
                             <Tooltip text="Button Down: Show today's items only. Button Up: Show all items"/>
@@ -58,12 +60,14 @@
 
     </top>
     <left>
+<!--        List of all the todoitems(short description)-->
         <ListView fx:id="todoListView" onKeyPressed="#handleKeyPressed">
 
         </ListView>
     </left>
     <center>
         <VBox style="-fx-background-color: white">
+            <!--Text area to show details about the task selected-->
             <TextArea fx:id="itemDetailTextArea" VBox.vgrow="ALWAYS" wrapText="true">
 
             </TextArea>
@@ -73,6 +77,7 @@
                         <Font name="Times New Roman bold" size="20"/>
                     </font>
                 </Label>
+                <!--Showing the deadline of selected item-->
                 <Label fx:id="dateLabel" style="-fx-background-color: white">
                     <font>
                         <Font name="Times New Roman bold" size="20"/>
